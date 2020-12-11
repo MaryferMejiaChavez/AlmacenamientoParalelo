@@ -3,14 +3,23 @@
 //#############################################
 
 //#include <ArduinoJson.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
 
 String server = "";
 
+
 const char *ssid     = "INFINITUM6708_2.4";
 const char *password = "XY8zTaaN77";
+String web="http://144.202.34.148:3018/Minip/api/";
+
+OneWire ourWire(4);
+
+DallasTemperature sensors(&ourWire);
+
 
 const int btnP12 = 4; //D2    
 const int btnP1 = 2; //D4    
@@ -25,6 +34,7 @@ int act12 = 0;
 void setup() {
   
   Serial.begin(115200);
+  sensors.begin();
 
   // led
   pinMode(btnP1, INPUT);
@@ -59,6 +69,14 @@ void loop() {
         delay(1000);
         p1 = 1;
       }
+      
+       sensors.requestTemperatures();
+  float temp=sensors.getTempCByIndex(0);
+  Serial.print("Temperatura= ");
+  Serial.print(temp);
+  Serial.println(" °C");
+  post(temp,no_co);
+  //Serial.print(post);
 
     }
     else {
