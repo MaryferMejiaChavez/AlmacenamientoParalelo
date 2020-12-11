@@ -1,4 +1,5 @@
-from pyspark import SparkContext,SparkConf
+from pyspark import SparkContext
+from pyspark import SparkConf
 from pyspark.sql import SparkSession
 import urllib2
 import urllib
