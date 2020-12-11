@@ -6,7 +6,7 @@ import json
 
 conf = SparkConf().setAppName("api_temperatura").setMaster("local")
 sc = SparkContext(conf=conf)
-url = "http://localhost:9091/obtenerTemperatura"
+url = "http://144.202.34.148:3018/Minip/api"
 args = {"Tipo":"Completa","NoCo":"05590693"}
 post_params = {"Tipo":"Completa","NoCo":"05590693"}
 params = urllib.urlencode(post_params)
